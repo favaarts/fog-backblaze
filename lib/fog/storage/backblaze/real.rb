@@ -250,8 +250,8 @@ class Fog::Storage::Backblaze::Real
         }
       )
     else
-      if content.is_a?(IO)
-        content = content.read
+      if local_file_path.is_a?(IO)
+        local_file_path = local_file_path.read
       end
 
       extra_headers = {}
@@ -280,12 +280,12 @@ class Fog::Storage::Backblaze::Real
 
       response = b2_command(nil,
         url: upload_url['uploadUrl'],
-        body: content,
+        body: local_file_path,
         headers: {
           'Authorization': upload_url['authorizationToken'],
           'Content-Type': 'b2/x-auto',
           'X-Bz-File-Name': "#{_esc_file(file_path)}",
-          'X-Bz-Content-Sha1': Digest::SHA1.hexdigest(content)
+          'X-Bz-Content-Sha1': Digest::SHA1.hexdigest(local_file_path)
         }.merge(extra_headers)
       )
 
