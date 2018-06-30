@@ -368,8 +368,8 @@ class Fog::Storage::Backblaze::Real
   def _get_object_version_ids(bucket_name, file_name)
     response = b2_command(:b2_list_file_versions,
       body: {
-        startFileName: file_name,
-        prefix: file_name,
+        startFileName: File.basename(file_name),
+        prefix: File.dirname(file_name),
         bucketId: _get_bucket_id!(bucket_name),
         maxFileCount: 1000
       }
