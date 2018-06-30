@@ -42,6 +42,7 @@ class Fog::Storage::Backblaze::File < Fog::Model
   def destroy
     requires :key
     response = service.delete_object(directory.key, key)
+    return true if response.nil?
     return response.status < 400
   #rescue Fog::Errors::NotFound
   #  false
