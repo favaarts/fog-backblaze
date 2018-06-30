@@ -349,7 +349,7 @@ class Fog::Storage::Backblaze::Real
     version_ids = _get_object_version_ids(bucket_name, file_name)
 
     if version_ids.size == 0
-      raise Fog::Errors::NotFound, "Can not find #{file_name} in in bucket #{bucket_name}"
+      # raise Fog::Errors::NotFound, "Can not find #{file_name} in in bucket #{bucket_name}"
     end
 
     logger.info("Deleting #{version_ids.size} versions of #{file_name}")
