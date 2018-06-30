@@ -45,7 +45,7 @@ class Fog::Storage::Backblaze::Files < Fog::Collection
 
   def head(file_name, options = {})
     requires :directory
-    data = service.head_object(directory.key, file_name, options)
+    file_response = service.head_object(directory.key, file_name, options)
     file_data = _headers_to_attrs(file_response)
     new(file_data)
   rescue Excon::Errors::NotFound
